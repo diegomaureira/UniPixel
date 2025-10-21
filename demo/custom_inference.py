@@ -266,13 +266,22 @@ def load_images_from_folder(folder_path):
 import os
 import shutil
 
-def copy_file(output_dir, image_path, output_path):
+def copy_file(prompt, image_path, output_dir, output_path, masks = None):
     if output_dir:
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
+        prompt_filename = prompt.replace(' ', '_')
+        filename = f"PROMPT-{prompt_filename.lower()}_NAME-{os.path.basename(image_path)}"
         if 'mp4' in image_path:
-            image_path = image_path.replace('.mp4', '.gif')
-        shutil.copy(output_path, os.path.join(output_dir, os.path.basename(image_path)))
+            image_save_path = filename.replace('.mp4', '.gif')
+        else:
+            image_save_path = filename
+        shutil.copy(output_path, os.path.join(output_dir, image_save_path))
+        
+        if masks:
+            import pickle
+            mask_output_path = os.path.join(output_dir, filename.replace('.gif', '_masks.pkl').replace('.jpg', '_masks.pkl')).replace('.png', '_masks.pkl')
+            pickle.dump(masks, open(mask_output_path, 'wb'))
 
 def run_batch_inference(yaml_path):
     with open(yaml_path, "r") as f:
@@ -288,7 +297,7 @@ def run_batch_inference(yaml_path):
             # Optionally handle other args
             result = infer_seg_image(image_path, prompt)
             answer, masks, output_path = result
-            copy_file(output_dir, image_path, output_path)
+            copy_file(prompt, image_path, output_dir, output_path, masks)
             
         elif ttype == "folder_segmentation":
             folder_path = task["folder_path"]
@@ -298,7 +307,7 @@ def run_batch_inference(yaml_path):
             for img_path in images:
                 result = infer_seg_image(img_path, prompt)
                 answer, masks, output_path = result
-                copy_file(output_dir, img_path, output_path)  
+                copy_file(prompt, img_path, output_dir, output_path, masks)
 
         elif ttype == "video_segmentation":
             video_path = task["video_path"]
@@ -307,7 +316,7 @@ def run_batch_inference(yaml_path):
             sample_frames = task.get("sample_frames", 16)
             result = infer_seg_video(video_path, prompt, sample_frames)
             answer, masks, output_path = result
-            copy_file(output_dir, video_path, output_path)
+            copy_file(prompt, video_path, output_dir, output_path, masks)
 
         elif ttype == "image_regional":
             image_path = task["image_path"]
@@ -321,5 +330,3 @@ def run_batch_inference(yaml_path):
 
 if __name__ == "__main__":
     run_batch_inference("demo/infer_config.yaml")
-
-# export PYTHONPATH=/UniPixel:$PYTHONPATH # set the PYTHONPATH to UniPixel root directory

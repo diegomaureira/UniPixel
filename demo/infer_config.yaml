@@ -27,7 +27,12 @@ tasks:
   # - type: folder_segmentation
   #   folder_path: "/media/disk/dm_test/sampled_frames/"
   #   prompt: "Please segment the person."
-  #   output_dir: "/media/disk/dm_test/output_masks_5/"
+  #   output_dir: "/media/disk/dm_test/output_masks/"
+
+  - type: folder_segmentation
+    folder_path: "/media/disk/dm_test/crops/"
+    prompt: "Please segment the hands of the person."
+    output_dir: "/media/disk/dm_test/cropped_output_masks/"
 
   # - type: video_segmentation
   #   video_path: "/media/disk/dm_test/new_transaction/wwCjTUupAGQIXkQzCQQm_ext_top_video_1759914702.mp4"
