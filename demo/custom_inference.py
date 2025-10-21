@@ -270,6 +270,8 @@ def copy_file(output_dir, image_path, output_path):
     if output_dir:
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
+        if 'mp4' in image_path:
+            image_path = image_path.replace('.mp4', '.gif')
         shutil.copy(output_path, os.path.join(output_dir, os.path.basename(image_path)))
 
 def run_batch_inference(yaml_path):

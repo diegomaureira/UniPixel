@@ -3,31 +3,53 @@ tasks:
   #   image_path: "/media/disk/dm_test/sampled_frames/wwCjTUupAGQIXkQzCQQm_ext_top_video_1759914702.mp4_frame_11.jpg"
   #   prompt: "Please segment the object that is being taken from the fridge."
   #   output_dir: "/media/disk/dm_test/output_masks/"
+
   # - type: folder_segmentation
   #   folder_path: "/media/disk/dm_test/sampled_frames/"
   #   prompt: "Please segment the object that is being taken from the fridge."
   #   output_dir: "/media/disk/dm_test/output_masks/"
-  - type: folder_segmentation
-    folder_path: "/media/disk/dm_test/sampled_frames/"
-    prompt: "Please segment the small object being moved."
-    output_dir: "/media/disk/dm_test/output_masks_2/"
-  - type: folder_segmentation
-    folder_path: "/media/disk/dm_test/sampled_frames/"
-    prompt: "Please segment the manipulated object."
-    output_dir: "/media/disk/dm_test/output_masks_3/"
-  - type: folder_segmentation
-    folder_path: "/media/disk/dm_test/sampled_frames/"
-    prompt: "Please segment the hands of the person."
-    output_dir: "/media/disk/dm_test/output_masks_4/"
-  - type: folder_segmentation
-    folder_path: "/media/disk/dm_test/sampled_frames/"
-    prompt: "Please segment the person."
-    output_dir: "/media/disk/dm_test/output_masks_5/"
+
+  # - type: folder_segmentation
+  #   folder_path: "/media/disk/dm_test/sampled_frames/"
+  #   prompt: "Please segment the small object being moved."
+  #   output_dir: "/media/disk/dm_test/output_masks_2/"
+
+  # - type: folder_segmentation
+  #   folder_path: "/media/disk/dm_test/sampled_frames/"
+  #   prompt: "Please segment the manipulated object."
+  #   output_dir: "/media/disk/dm_test/output_masks_3/"
+
+  # - type: folder_segmentation
+  #   folder_path: "/media/disk/dm_test/sampled_frames/"
+  #   prompt: "Please segment the hands of the person."
+  #   output_dir: "/media/disk/dm_test/output_masks_4/"
+
+  # - type: folder_segmentation
+  #   folder_path: "/media/disk/dm_test/sampled_frames/"
+  #   prompt: "Please segment the person."
+  #   output_dir: "/media/disk/dm_test/output_masks_5/"
+
   # - type: video_segmentation
-  #   video_path: "/path/to/video1.mp4"
-  #   prompt: "segment the dog"
-  #   sample_frames: 12
+  #   video_path: "/media/disk/dm_test/new_transaction/wwCjTUupAGQIXkQzCQQm_ext_top_video_1759914702.mp4"
+  #   prompt: "Please segment the object that is being taken from the fridge."
+  #   output_dir: "/media/disk/dm_test/output_video_masks/"
+  #   sample_frames: 16
+
+  # - type: video_segmentation
+  #   video_path: "/media/disk/dm_test/new_transaction/wwCjTUupAGQIXkQzCQQm_ext_top_video_1759914702.mp4"
+  #   prompt: "Please segment the hands of the person."
+  #   output_dir: "/media/disk/dm_test/output_video_masks_2/"
+  #   sample_frames: 16
+
+  # - type: video_segmentation
+  #   video_path: "/media/disk/dm_test/new_transaction/wwCjTUupAGQIXkQzCQQm_ext_top_video_1759914702.mp4"
+  #   prompt: "Please segment the person."
+  #   output_dir: "/media/disk/dm_test/output_video_masks_3/"
+  #   sample_frames: 16
+
   # - type: image_regional
   #   image_path: "/path/to/image2.jpg"
   #   prompt: "describe the left region"
   #   region_mask: "/path/to/mask2.png"
+
+# export DECORD_REWIND_RETRY_MAX=32
