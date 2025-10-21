@@ -12,3 +12,5 @@ __pycache__
 /work_dirs*
 .DS_Store
 ._*
+
+venv/
