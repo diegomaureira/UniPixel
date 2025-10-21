@@ -32,13 +32,13 @@ model:
     d_model: 256
     pos_enc_at_input: true
     layer:
-      _target_: sam2.modeling.memory_attention.MemoryAttentionLayer
+      # _target_: sam2.modeling.memory_attention.MemoryAttentionLayer
       activation: relu
       dim_feedforward: 2048
       dropout: 0.1
       pos_enc_at_attn: false
       self_attention:
-        _target_: sam2.modeling.sam.transformer.RoPEAttention
+        # _target_: sam2.modeling.sam.transformer.RoPEAttention
         rope_theta: 10000.0
         feat_sizes: [64, 64]
         embedding_dim: 256
@@ -49,10 +49,10 @@ model:
       pos_enc_at_cross_attn_keys: true
       pos_enc_at_cross_attn_queries: false
       cross_attention:
-        _target_: sam2.modeling.sam.transformer.RoPEAttention
+        # _target_: sam2.modeling.sam.transformer.RoPEAttention
         rope_theta: 10000.0
         feat_sizes: [64, 64]
-        rope_k_repeat: True
+        rope_k_repeat: true
         embedding_dim: 256
         num_heads: 1
         downsample_rate: 1
@@ -77,12 +77,12 @@ model:
       fuser:
         _target_: sam2.modeling.memory_encoder.Fuser
         layer:
-          _target_: sam2.modeling.memory_encoder.CXBlock
+          # _target_: sam2.modeling.memory_encoder.CXBlock
           dim: 256
           kernel_size: 7
           padding: 3
           layer_scale_init_value: 1e-6
-          use_dwconv: True  # depth-wise convs
+          use_dwconv: true  # depth-wise convs
         num_layers: 2
 
   num_maskmem: 7
@@ -99,7 +99,7 @@ model:
   # output 3 masks on the first click on initial conditioning frames
   multimask_output_in_sam: true
   # SAM heads
-  iou_prediction_use_sigmoid: True
+  iou_prediction_use_sigmoid: true
   # cross-attend to object pointers from other frames (based on SAM output tokens) in the encoder
   use_obj_ptrs_in_encoder: true
   add_tpos_enc_to_obj_ptrs: true
